@@ -1,0 +1,32 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: Load playbook vars
+      include_vars:
+        file: "vars/main.yml"
+
+    - name: Load vault vars
+      include_vars: "{{ lookup('first_found', possible_files) }}"
+      vars:
+        possible_files:
+          - "{{ vault }}"
+          - "vars/vault.yml"
+
+    - name: Create a new instance and attaches to a network and passes metadata to the instance
+      os_server:
+        state: present
+        auth:
+          auth_url: "{{ url }}"
+          username: "{{ os_user }}"
+          password: "{{ os_passwd }}"
+          project_name: "{{ project }}"
+          os_project_domain_name: "{{ project_domain }}"
+          os_user_domain_name: "{{ user_domain }}"
+        name: "{{ vm_name }}"
+        image: "{{ image_name }}"
+        timeout: "{{ timeout }}"
+	flavor: "{{ vm_flavour }}"
+        nics:
+          - net-name: "{{ vm_net }}"
+      delegate_to: localhost
