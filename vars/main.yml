@@ -1,0 +1,12 @@
+---
+
+vault: ""
+url: "http://osserver:5000/v3"
+project: "admin"
+project_domain: "Default"
+user_domain: "Default"
+image_name: "CustomOS"
+vm_name: "customos_test"
+timeout: "200"
+vm_flavour: "lab.small"
+vm_net: "private_network"
