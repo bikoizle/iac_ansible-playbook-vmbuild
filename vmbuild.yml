@@ -27,6 +27,8 @@
         image: "{{ image_name }}"
         timeout: "{{ timeout }}"
         flavor: "{{ vm_flavour }}"
+        boot_from_volume: "yes"
+        volume_size: "{{ vm_vol_size }}"
         nics:
           - net-name: "{{ vm_net }}"
       delegate_to: localhost
